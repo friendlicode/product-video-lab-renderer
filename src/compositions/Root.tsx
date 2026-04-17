@@ -1,5 +1,5 @@
 import React from 'react'
-import { Composition } from 'remotion'
+import { Composition, registerRoot } from 'remotion'
 import { VideoProject } from './VideoProject'
 
 export const RemotionRoot: React.FC = () => {
@@ -22,3 +22,5 @@ export const RemotionRoot: React.FC = () => {
     </>
   )
 }
+
+registerRoot(RemotionRoot)
