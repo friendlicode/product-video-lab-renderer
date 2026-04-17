@@ -70,7 +70,11 @@ export async function renderProject(
 
   const outPath = join(tmpdir(), `${jobId}.mp4`)
 
-  console.log(`[renderer] Rendering ${durationInFrames} frames at ${width}x${height} (${aspectRatio})`)
+  // RENDER_SCALE: set to 1 for full quality, 0.5 for half-res (fits in 512 MB RAM).
+  // Change via Railway env var — no redeploy needed.
+  const scale = Number(process.env.RENDER_SCALE ?? 0.5)
+
+  console.log(`[renderer] Rendering ${durationInFrames} frames at ${width}x${height} (${aspectRatio}) scale=${scale}`)
 
   await renderMedia({
     composition,
@@ -78,6 +82,7 @@ export async function renderProject(
     codec: 'h264',
     outputLocation: outPath,
     inputProps,
+    scale,
     // Limit to 1 concurrent browser tab to stay within Railway's memory limit.
     concurrency: 1,
     // Use software GL renderer + single-process mode to minimise RAM usage
