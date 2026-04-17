@@ -32,6 +32,10 @@ export async function makeThumbnail(
       frame: 1,
       imageFormat: 'png',
       inputProps,
+      chromiumOptions: {
+        gl: 'swangle',
+        enableMultiProcessOnLinux: false,
+      },
     })
     return await readFile(outPath)
   } finally {

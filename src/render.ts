@@ -80,6 +80,12 @@ export async function renderProject(
     inputProps,
     // Limit to 1 concurrent browser tab to stay within Railway's memory limit.
     concurrency: 1,
+    // Use software GL renderer + single-process mode to minimise RAM usage
+    // when running inside a Docker container on Railway.
+    chromiumOptions: {
+      gl: 'swangle',
+      enableMultiProcessOnLinux: false,
+    },
     onProgress: async ({ progress }) => {
       const pct = Math.round(progress * 100)
       if (pct % 10 === 0) {
