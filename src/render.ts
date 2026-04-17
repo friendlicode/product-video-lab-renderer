@@ -78,6 +78,8 @@ export async function renderProject(
     codec: 'h264',
     outputLocation: outPath,
     inputProps,
+    // Limit to 1 concurrent browser tab to stay within Railway's memory limit.
+    concurrency: 1,
     onProgress: async ({ progress }) => {
       const pct = Math.round(progress * 100)
       if (pct % 10 === 0) {
