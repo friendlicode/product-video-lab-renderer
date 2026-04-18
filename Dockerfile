@@ -1,4 +1,4 @@
-FROM node:20-bullseye-slim
+FROM node:20-bookworm-slim
 
 # Install Chrome headless shell system dependencies + FFmpeg
 RUN apt-get update && apt-get install -y --no-install-recommends \
